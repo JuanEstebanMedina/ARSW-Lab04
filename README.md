@@ -1,10 +1,63 @@
-## Escuela Colombiana de Ingeniería
+# ARSW-Lab04
 
-## Arquitecturas de Software
+**Colombian School of Engineering Julio Garavito**  
+**Software Architectures - ARSW**  
+**Laboratory Number 4**
 
-# Componentes y conectores - Parte I.
+**Members:**
+- Juan Esteban Medina Rivas
+- María Paula Sánchez Macías
+
+---
+
+## Part 0 - aditional basic exercise
+
+> To illustrate the use of the Spring framework and the development environment for using it through Maven (and NetBeans), we will configure a text analysis application that uses a grammar checker that requires a spell checker. The required spell checker will be injected into the grammar checker at runtime (for now, there are two available: English and Spanish).
+
+First, we had to open the project with NetBeans
+
+<img src="excersice/img/1. NetBeans.png">
+
+> Second, we checked that the Spring configuration file already included in the project (src/main/resources). It indicates that Spring will automatically search for the 'Beans' available in the specified package.
+
+<img src="excersice/img/2. NetBeans.png">
+
+<img src="excersice/img/2.1 base-package.png">
+
+> Third, we had o use the annotation-based Spring configuration, mark the dependencies that must be injected with the @Autowired and @Service annotations, and the candidate beans to be injected, respectively.
+
+- GrammarChecker will be a bean, which has a dependency of type ‘SpellChecker’.
+- EnglishSpellChecker and SpanishSpellChecker are the two possible candidates to be injected. You must select one or the other, but NOT both (there would be a dependency resolution conflict). For now, use EnglishSpellChecker.
+
+We use *@Service("spanishSpellChecker")* and *@Service("englishSpellChecker")* to solve the conflicts and then *@Qualifier("englishSpellChecker")*
+
+<img src="excersice/img/3. Autowired.png">
+
+> we created a test program where an instance of GrammarChecker is created using Spring, and then used:
+
+```java
+public static void main(String[] args) {
+	ApplicationContext ac=new ClassPathXmlApplicationContext("applicationContext.xml");
+	GrammarChecker gc=ac.getBean(GrammarChecker.class);
+	System.out.println(gc.check("la la la "));
+}
+```
+
+> we modified the configuration with annotations so that the Bean ‘GrammarChecker’ now uses the SpanishSpellChecker class (so that GrammarChecker is injected with EnglishSpellChecker instead of SpanishSpellChecker). Verify the new result.
+
+**Spanish Spell Checker Test**
+<img src="excersice/img/4.1 spanishCheckerTest.png">
+
+**English Spell Checker Test**
+<img src="excersice/img/4.2 englishCheckerTest.png">
+
+
+---
+
+## Componentes y conectores - Parte I.
 
 El ejercicio se debe traer terminado para el siguiente laboratorio (Parte II).
+
 
 #### Middleware- gestión de planos.
 
