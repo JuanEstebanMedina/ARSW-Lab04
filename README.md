@@ -88,10 +88,37 @@ After the implementation, we runned the tests to verify if everything is working
 
 > 3. We made a program in which you create (using Spring) an instance of BlueprintServices, and rectify its functionality: register plans, query plans, register specific plans, etc.
 
+**Testing the program**
 
+<img src="img/3 Ejecución.png">
 
-4. Se quiere que las operaciones de consulta de planos realicen un proceso de filtrado, antes de retornar los planos consultados. Dichos filtros lo que buscan es reducir el tamaño de los planos, removiendo datos redundantes o simplemente submuestrando, antes de retornarlos. Ajuste la aplicación (agregando las abstracciones e implementaciones que considere) para que a la clase BlueprintServices se le inyecte uno de dos posibles 'filtros' (o eventuales futuros filtros). No se contempla el uso de más de uno a la vez:
-	* (A) Filtrado de redundancias: suprime del plano los puntos consecutivos que sean repetidos.
-	* (B) Filtrado de submuestreo: suprime 1 de cada 2 puntos del plano, de manera intercalada.
+> 4. The query operations are expected to perform a filtering process before returning the queried plans. These filters aim to reduce the size of the plans by removing redundant data or simply subsampling them before returning them. Adjust the application (adding the abstractions and implementations you consider) so that one of two possible "filters" (or possible future filters) is injected into the BlueprintServices class. The use of more than one at a time is not contemplated:
+* (A) Redundancy filtering: removes consecutive points that are repeated from the plan.
+* (B) Subsampling filtering: removes one out of every two points from the plan, in an interleaved manner.
 
-5. Agrege las pruebas correspondientes a cada uno de estos filtros, y pruebe su funcionamiento en el programa de prueba, comprobando que sólo cambiando la posición de las anotaciones -sin cambiar nada más-, el programa retorne los planos filtrados de la manera (A) o de la manera (B). 
+We created a *BlueprintFilter.java* interface, and then the two implementations: (A) *RedundancyFilter.java* and (B) *SubsamplingFilter.java*
+
+<img src="img/4 BlueprintFilter.PNG">
+
+Then, the filter is injected to *BlueprintsServices.java* through *@Autowired* annotation and make the call on the *getBlueprint* and *getBlueprintsByAuthor* methods.
+
+<img src="img/4 BlueprintsServices.PNG">
+
+> 5. Finally, we had to add the corresponding tests to each of these filters, and test their operation in the test program, checking that by only changing the position of the annotations - without changing anything else - the program returns the filtered plans in the manner (A) or in the manner (B).
+
+We created the tests and execute them
+
+<img src="img/5 filtersTests.png"> <img src="img/5 executeTests.png">
+
+Using this points to test the filters:
+```java
+Point[] pts3 = { new Point(0, 0), new Point(0, 0), new Point(0, 0), new Point(10, 10), new Point(20, 20) };
+```
+
+After executing with *RedundancyFilter* it's possible to see that there's only one instance of Point (0,0)
+
+<img src="img/5 redundancyFilter.PNG">
+
+Then, we changed the *@Qualifier* annotation in *BlueprintsServices.java* to use *subsamplingFilter* instead and the results were correct
+
+<img src="img/5 SubsamplingFilter.png">
