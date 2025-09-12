@@ -46,39 +46,40 @@ public static void main(String[] args) {
 > we modified the configuration with annotations so that the Bean ‘GrammarChecker’ now uses the SpanishSpellChecker class (so that GrammarChecker is injected with EnglishSpellChecker instead of SpanishSpellChecker). Verify the new result.
 
 **Spanish Spell Checker Test**
+
 <img src="excersice/img/4.1 spanishCheckerTest.png">
 
 **English Spell Checker Test**
+
 <img src="excersice/img/4.2 englishCheckerTest.png">
 
 
 ---
 
-## Componentes y conectores - Parte I.
+## Part I - Connectors and Components
 
-El ejercicio se debe traer terminado para el siguiente laboratorio (Parte II).
+> In this exercise, we will build a class model for the logical layer of an application that manages architectural plans for a prestigious design company.
 
+<img src="img/ClassDiagram1.png">
 
-#### Middleware- gestión de planos.
+> 1. Configure the application to run under a dependency injection scheme, as shown in the diagram above.
 
+This means we should:
 
-## Antes de hacer este ejercicio, realice [el ejercicio introductorio al manejo de Spring y la configuración basada en anotaciones](https://github.com/ARSW-ECI/Spring_LightweightCont_Annotation-DI_Example).
+* Add Spring dependencies.
 
-En este ejercicio se va a construír un modelo de clases para la capa lógica de una aplicación que permita gestionar planos arquitectónicos de una prestigiosa compañia de diseño. 
+<img src="img/1. Dependencies.png">
 
-![](img/ClassDiagram1.png)
+* Add Spring configuration.
 
-1. Configure la aplicación para que funcione bajo un esquema de inyección de dependencias, tal como se muestra en el diagrama anterior.
+<img src="img/2. ApplicationContext.png">
 
-
-	Lo anterior requiere:
-
-	* Agregar las dependencias de Spring.
-	* Agregar la configuración de Spring.
-	* Configurar la aplicación -mediante anotaciones- para que el esquema de persistencia sea inyectado al momento de ser creado el bean 'BlueprintServices'.
+* Configuring the application, using annotations, so that the persistence scheme is injected when the 'BlueprintServices' bean is created.
 
 
-2. Complete los operaciones getBluePrint() y getBlueprintsByAuthor(). Implemente todo lo requerido de las capas inferiores (por ahora, el esquema de persistencia disponible 'InMemoryBlueprintPersistence') agregando las pruebas correspondientes en 'InMemoryPersistenceTest'.
+
+
+> 2. Complete los operaciones getBluePrint() y getBlueprintsByAuthor(). Implemente todo lo requerido de las capas inferiores (por ahora, el esquema de persistencia disponible 'InMemoryBlueprintPersistence') agregando las pruebas correspondientes en 'InMemoryPersistenceTest'.
 
 3. Haga un programa en el que cree (mediante Spring) una instancia de BlueprintServices, y rectifique la funcionalidad del mismo: registrar planos, consultar planos, registrar planos específicos, etc.
 
